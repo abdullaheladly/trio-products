@@ -26,9 +26,10 @@ class AuthService constructor(private val jwtEncoder: JwtEncoder, private val us
             throw Exception("Invalid password for user ${authentication.username}")
         }
         val scopes = determineScopes(user)
+         println(scopes)
         val claims= JwtClaimsSet.builder().issuer("self")
                 .issuedAt(Instant.now())
-                .expiresAt(Instant.now().plusSeconds(60*30))
+                .expiresAt(Instant.now().plusSeconds(30*60))
                 .subject(authentication.username)
                 .claim("scope",scopes)
                 .build()
